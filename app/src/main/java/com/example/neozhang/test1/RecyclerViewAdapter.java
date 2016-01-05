@@ -46,4 +46,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<perCardViewHolder>
         }
         else return 0;
     }
+
+    public void addCard(Cards newCard){
+        cards.add(1,newCard);
+    }
+
+    public void addCard(String q, String a){
+        Cards newCard = new Cards(q,a);
+        cards.add(1,newCard);
+    }
 }
