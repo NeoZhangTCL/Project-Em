@@ -16,12 +16,14 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerViewAdapter mAdapter;
-    private List<Cards> cards;
+    private List<Cards> cards = new ArrayList<>(10);
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -100,8 +102,8 @@ public class MainActivity extends AppCompatActivity {
                     public boolean onQueryTextSubmit(String query) {
                         //perform the final search
                         Cards newCard = new Cards(query, "Sorry, we got no anwser for this question right now.");
-                        cards.add(1,newCard);
-                        mAdapter.notifyItemInserted(1);
+                        cards.add(0, newCard);
+                        mAdapter.notifyItemInserted(0);
                         return true;
                     }
 

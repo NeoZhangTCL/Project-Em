@@ -1,5 +1,6 @@
 package com.example.neozhang.test1;
 
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +25,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<perCardViewHolder>
      */
     @Override
     public perCardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview, null);
+        CardView cardView = (CardView)parent.findViewById(R.id.cardItem);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview, cardView, false);
         perCardViewHolder holder = new perCardViewHolder(v);
         return holder;
     }
