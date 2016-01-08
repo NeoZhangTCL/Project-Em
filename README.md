@@ -1,0 +1,3 @@
+# Project-Em
+so more ...
+卡片列表重复的只改变位置而不重复显示，最后一张卡片被删除时自动将initalCard放进recyclerView，为了让人能够不至于忘记怎么使用。
