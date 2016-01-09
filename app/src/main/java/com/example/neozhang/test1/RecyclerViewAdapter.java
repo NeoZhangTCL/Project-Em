@@ -1,6 +1,5 @@
 package com.example.neozhang.test1;
 
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,8 +24,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<perCardViewHolder>
      */
     @Override
     public perCardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        CardView cardView = (CardView)parent.findViewById(R.id.cardItem);
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview, cardView, false);
+        RecyclerView recycler = (RecyclerView)parent.findViewById(R.id.recycler_view);
+        /*
+        public View inflate (XmlPullParser parser, ViewGroup root, boolean attachToRoot)
+        parser	XML dom node containing the description of the view hierarchy.
+        root	Optional view to be the parent of the generated hierarchy (if attachToRoot is true), or else simply an object that provides a set of LayoutParams values for root of the returned hierarchy (if attachToRoot is false.)
+        attachToRoot	Whether the inflated hierarchy should be attached to the root parameter? If false, root is only used to create the correct subclass of LayoutParams for the root view in the XML.
+         */
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview, recycler, false);
         perCardViewHolder holder = new perCardViewHolder(v);
         return holder;
     }
@@ -51,10 +56,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<perCardViewHolder>
 
     public void addCard(Cards newCard){
         cards.add(1,newCard);
+        this.notifyItemRangeInserted(1,1);
     }
 
     public void addCard(String q, String a){
         Cards newCard = new Cards(q,a);
-        cards.add(1,newCard);
+        cards.add(0,newCard);
     }
 }

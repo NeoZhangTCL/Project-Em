@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerViewAdapter mAdapter;
     private List<Cards> cards = new ArrayList<>(10);
+    private LinearLayoutManager manager;
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -42,12 +43,14 @@ public class MainActivity extends AppCompatActivity {
         //setup the initialCard which gives instruction how to use the cardView
         Cards initialCard = new Cards("How to use the cards?","History search results will be presented here. \nIf you don't want to see it anymore, swipe cards left or right to get rid of it." );
 //        System.out.println(initialCard.getQuestionString()+" "+initialCard.getAnswerString());
-        cards.add(initialCard);
         mAdapter = new RecyclerViewAdapter(cards);
+        cards.add(0, initialCard);
+        mAdapter.notifyItemRangeInserted(0,1);
 
         //build the recyclerView, and show it
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        manager=new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(mAdapter);
 
         //when Swipe, notice that and show it
@@ -101,10 +104,11 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public boolean onQueryTextSubmit(String query) {
                         //perform the final search
-                        Cards newCard = new Cards(query, "Sorry, we got no anwser for this question right now.");
-                        cards.add(0, newCard);
-                        mAdapter.notifyItemInserted(0);
-                        return true;
+                        Cards newCard = new Cards(query, "Sorry, we got no answer for this question right now.");
+                        cards.add(0,newCard);
+                        manager.scrollToPositionWithOffset(0, 58);
+                        mAdapter.notifyItemRangeInserted(0,1);
+                        return false;
                     }
 
                     @Override
